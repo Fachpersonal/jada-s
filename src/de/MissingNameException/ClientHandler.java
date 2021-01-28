@@ -75,4 +75,6 @@ public class ClientHandler implements Runnable{
 	public ClientHandler getClient() {return this;}
 	
 	public String getAccountName() {return accountName;}
+	
+	public void setAccountName(String accountName) {this.accountName = accountName;}
 }

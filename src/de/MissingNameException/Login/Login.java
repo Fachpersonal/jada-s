@@ -49,6 +49,7 @@ public class Login {
 					x += "Successfully logged in!" + App.nl + "    Logged in as '" + input + "' " + App.nl;
 					App.printC(client.getClientSocket(), x);
 //					OldAccount.updateAccounts();
+					client.setAccountName(input);
 					return false;
 				}
 			}

@@ -23,10 +23,16 @@ public class Help implements Command{
 		ArrayList<String> description = App.d.StringSELECT("SELECT * FROM jada.commands ORDER BY cmd", "description");
 		String result = "";
 		for (int i = 0; i < cmd.size(); i++) {
-			String[] perms = App.d.SELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions").split(",");
-			
-			for (int j = 0; j < perms.length; j++) {
-				if(perms[j].equals(CommandManager.commands.get(i).getCommandPermission()) || perms[j].equals("*")) {
+			String x = App.d.StringSELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions").get(0);
+			ArrayList<String> perms = new ArrayList<String>();
+			if(x.contains(",")) {
+				String[] temp = x.split(",");
+				for (int j = 0; j < temp.length; j++) {
+					perms.add(temp[j]);
+				}
+			}
+			for (int j = 0; j < perms.size(); j++) {
+				if(perms.get(j).equals(CommandManager.commands.get(i).getCommandPermission()) || perms.get(j).equals("*")) {
 					result += cmd.get(i) + " | " + description.get(i) + App.nl;
 				}
 			}

@@ -163,7 +163,9 @@ public class App {
 		*/
 		for (int i = 0; i < CommandManager.commands.size(); i++) {
 			if(CommandManager.commands.get(i).getCommandName().equals(cmd.toLowerCase()) || CommandManager.aliasExists(cmd, CommandManager.commands.get(i))) {
-				String x = d.SELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions");
+//				System.out.println(client.getAccountName());
+//				System.out.println(d.StringSELECT("SELECT * FROM jada.accounts", "permissions").get(0));
+				String x = d.StringSELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions").get(0);
 				ArrayList<String> perms = new ArrayList<String>();
 				if(x.contains(",")) {
 					String[] temp = x.split(",");

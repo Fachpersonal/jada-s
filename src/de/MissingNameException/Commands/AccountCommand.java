@@ -34,7 +34,7 @@ public class AccountCommand implements Command{
 						if(x.contains(arg[1])) {
 							for (int i = 0; i < x.size(); i+=2) {
 								if(x.get(i).equals(arg[1])) {
-									String y = App.d.SELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions");
+									String y = App.d.StringSELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions").get(0);
 									ArrayList<String> perms = new ArrayList<String>();
 									if(y.contains(",")) {
 										String[] temp = y.split(",");
