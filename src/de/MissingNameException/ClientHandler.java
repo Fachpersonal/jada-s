@@ -8,12 +8,12 @@ import java.net.Socket;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import de.MissingNameException.Login.Account;
+import de.MissingNameException.Login.OldAccount;
 import de.MissingNameException.Login.Login;
 
 public class ClientHandler implements Runnable{
 
-	private Account clientAcc = null;
+	private OldAccount clientAcc = null;
 	
 	private Socket client;
 	
@@ -71,7 +71,7 @@ public class ClientHandler implements Runnable{
 	
 	public ClientHandler getClient() {return this;}
 	
-	public Account getClientAcc() {return clientAcc;}
+	public OldAccount getClientAcc() {return clientAcc;}
 	
-	public void setClientAcc(Account acc) {clientAcc = acc;}
+	public void setClientAcc(OldAccount acc) {clientAcc = acc;}
 }

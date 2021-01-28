@@ -30,7 +30,7 @@ import de.MissingNameException.Commands.Time;
 import de.MissingNameException.Errors.ErrorManagerList;
 import de.MissingNameException.Errors.FixErrors;
 
-import de.MissingNameException.Login.Account;
+import de.MissingNameException.Login.OldAccount;
 
 public class App {
 	
@@ -163,7 +163,7 @@ public class App {
 		*/
 		for (int i = 0; i < CommandManager.commands.size(); i++) {
 			if(CommandManager.commands.get(i).getCommandName().equals(cmd.toLowerCase()) || CommandManager.aliasExists(cmd, CommandManager.commands.get(i))) {
-				if(Account.hasPermission(client.getClientSocket(), CommandManager.commands.get(i), client.getClientAcc())) {
+				if(OldAccount.hasPermission(client.getClientSocket(), CommandManager.commands.get(i), client.getClientAcc())) {
 					if(arg.length > 0) {
 						CommandManager.commands.get(i).crun(client, arg);
 					} else {

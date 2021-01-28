@@ -5,7 +5,7 @@ import java.io.IOException;
 import de.MissingNameException.App;
 import de.MissingNameException.ClientHandler;
 import de.MissingNameException.Errors.ErrorManagerList;
-import de.MissingNameException.Login.Account;
+import de.MissingNameException.Login.OldAccount;
 
 public class AccountCommand implements Command{
 	
@@ -20,19 +20,19 @@ public class AccountCommand implements Command{
 			if(arg[0].equalsIgnoreCase("show")) {
 				//App.printC(client.getClientSocket(),, Account.accounts.size());
 				String x = "";
-				for (int i = 0; i < Account.accounts.size(); i++) {
-					x += (Account.accounts.get(i).toString()) + App.nl;
+				for (int i = 0; i < OldAccount.accounts.size(); i++) {
+					x += (OldAccount.accounts.get(i).toString()) + App.nl;
 				}
 				App.printC(client.getClientSocket(), x);
 			} else if(arg[0].equalsIgnoreCase("addperm")) {
 				if(arg.length >= 3) {
 					try {
-						if(Account.canExecute(arg[2], Account.getSpecificAccount(arg[1]))) {
+						if(OldAccount.canExecute(arg[2], OldAccount.getSpecificAccount(arg[1]))) {
 							App.printC(client.getClientSocket(), ErrorManagerList.print("e004"));;
 						} else {
-							String oldPerm = Account.getSpecificAccount(arg[1]).getPermissions();
-							Account.getSpecificAccount(arg[1]).getPermission().add(arg[2]);
-							String newPerm = Account.getSpecificAccount(arg[1]).getPermissions();
+							String oldPerm = OldAccount.getSpecificAccount(arg[1]).getPermissions();
+							OldAccount.getSpecificAccount(arg[1]).getPermission().add(arg[2]);
+							String newPerm = OldAccount.getSpecificAccount(arg[1]).getPermissions();
 							App.d.execute("UPDATE jada.accounts SET permissions='" + newPerm + "' WHERE permissions='" + oldPerm + "'");
 							App.printC(client.getClientSocket(), "" + App.nl + oldPerm + App.nl + newPerm + App.nl + "Permission '" + arg[2] + "' added to '" + arg[1] + "'");
 						}
@@ -47,8 +47,8 @@ public class AccountCommand implements Command{
 			} else if(arg[0].equalsIgnoreCase("removeperm")) {
 				if(arg.length >= 3) {
 					try {
-						if(Account.canExecute(arg[2], Account.getSpecificAccount(arg[1]))) {
-							Account acc = Account.getSpecificAccount(arg[1]);
+						if(OldAccount.canExecute(arg[2], OldAccount.getSpecificAccount(arg[1]))) {
+							OldAccount acc = OldAccount.getSpecificAccount(arg[1]);
 							String oldPerm = acc.getPermissions();
 							acc.getPermission().remove(arg[2]);
 							String newPerm = acc.getPermissions();
@@ -67,7 +67,7 @@ public class AccountCommand implements Command{
 				try {
 					try {
 						if(arg.length >= 4) {
-							Account.getSpecificAccount(arg[1]).edit(client.getClientSocket(), arg[2], arg[3]);
+							OldAccount.getSpecificAccount(arg[1]).edit(client.getClientSocket(), arg[2], arg[3]);
 						} else {
 							App.printC(client.getClientSocket(), ErrorManagerList.print("e001") + App.nl + "addperm {%account} {%perm} | removeperm {%account} {%perm} | show | edit {%account} {%var}");
 						}

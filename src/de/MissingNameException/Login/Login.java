@@ -41,14 +41,14 @@ public class Login {
 		for (int i = 0; i < d.StringSELECT("SELECT * FROM jada.accounts", "accountName").size(); i++) {
 			if(d.StringSELECT("SELECT * FROM jada.accounts", "accountName").get(i).equals(input)) {
 				if(d.StringSELECT("SELECT accountPassword FROM jada.accounts WHERE accountName='" + input + "'", "accountPassword").get(0).equals(input2)) {
-					client.setClientAcc(new Account(input, (d.StringSELECT("SELECT permissions FROM jada.accounts WHERE accountName='" + input + "'", "permissions").get(0)).split(", ")));					
+					client.setClientAcc(new OldAccount(input, (d.StringSELECT("SELECT permissions FROM jada.accounts WHERE accountName='" + input + "'", "permissions").get(0)).split(", ")));					
 					String x = "" + App.nl;
 					for (int j = 0; j < 40; j++) {
 						x += " " + App.nl;
 					}
 					x += "Successfully logged in!" + App.nl + "    Logged in as '" + input + "' " + App.nl;
 					App.printC(client.getClientSocket(), x);
-					Account.updateAccounts();
+					OldAccount.updateAccounts();
 					return false;
 				}
 			}

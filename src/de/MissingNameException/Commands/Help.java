@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import de.MissingNameException.App;
 import de.MissingNameException.ClientHandler;
-import de.MissingNameException.Login.Account;
+import de.MissingNameException.Login.OldAccount;
 
 
 public class Help implements Command{
@@ -23,7 +23,7 @@ public class Help implements Command{
 		ArrayList<String> permission = App.d.StringSELECT("SELECT * FROM jada.commands ORDER BY cmd", "permission");
 		String result = "";
 		for (int i = 0; i < cmd.size(); i++) {
-			if(Account.canExecute(permission.get(i), client.getClientAcc())) {
+			if(OldAccount.canExecute(permission.get(i), client.getClientAcc())) {
 				result += cmd.get(i) + " | " + description.get(i) + App.nl;	
 			}
 		}
