@@ -37,16 +37,6 @@ public class Driver {
 			e.printStackTrace();
 		}
 	}
-	public String SELECT(String cmd, String string) throws IOException {
-		try {
-			myRs = myStmt.executeQuery(cmd);
-			String x = myRs.getString(string);
-			return x;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	public ArrayList<String> StringSELECT(String cmd, String... strings) {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
