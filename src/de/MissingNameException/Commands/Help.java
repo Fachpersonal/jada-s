@@ -19,12 +19,10 @@ public class Help implements Command{
 	
 	@Override
 	public void crun(ClientHandler client,String...arg) throws IOException {
-		ArrayList<String> cmd = App.d.StringSELECT("SELECT * FROM jada.commands ORDER BY cmd", "cmd");
-		ArrayList<String> description = App.d.StringSELECT("SELECT * FROM jada.commands ORDER BY cmd", "description");
 		String result = "";
-		for (int i = 0; i < cmd.size(); i++) {
-			if(App.canRun(CommandManager.commands.get(i).getCommandPermission(), client)){
-				result += cmd.get(i) + " | " + description.get(i) + App.nl;
+		for (int i = 0; i < CommandManager.commands.size(); i++) {
+			if(App.canRun(CommandManager.commands.get(i).getCommandPermission(), client)) {
+				result += CommandManager.commands.get(i).getCommandName() + " | " + CommandManager.commands.get(i).getCommandDescription() + App.nl;
 			}
 		}
 		App.printC(client.getClientSocket(), result);
