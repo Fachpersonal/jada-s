@@ -34,9 +34,16 @@ public class AccountCommand implements Command{
 						if(x.contains(arg[1])) {
 							for (int i = 0; i < x.size(); i+=2) {
 								if(x.get(i).equals(arg[1])) {
-									String[] perms = x.get(i+1).split(",");
-									for (int j = 0; j < perms.length; j++) {
-										if(perms[j].equals(CommandManager.commands.get(i).getCommandPermission())) {
+									String y = App.d.SELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions");
+									ArrayList<String> perms = new ArrayList<String>();
+									if(y.contains(",")) {
+										String[] temp = y.split(",");
+										for (int j = 0; j < temp.length; j++) {
+											perms.add(temp[j]);
+										}
+									}
+									for (int j = 0; j < perms.size(); j++) {
+										if(perms.get(j).equals(CommandManager.commands.get(i).getCommandPermission()) || perms.get(j).equals("*")) {
 											App.printC(client.getClientSocket(), ErrorManagerList.print("e004"));
 											return;
 										} else {

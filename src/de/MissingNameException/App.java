@@ -163,10 +163,16 @@ public class App {
 		*/
 		for (int i = 0; i < CommandManager.commands.size(); i++) {
 			if(CommandManager.commands.get(i).getCommandName().equals(cmd.toLowerCase()) || CommandManager.aliasExists(cmd, CommandManager.commands.get(i))) {
-				String[] perms = d.SELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions").split(",");
-				
-				for (int j = 0; j < perms.length; j++) {
-					if(perms[j].equals(CommandManager.commands.get(i).getCommandPermission()) || perms[j].equals("*")) {
+				String x = d.SELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions");
+				ArrayList<String> perms = new ArrayList<String>();
+				if(x.contains(",")) {
+					String[] temp = x.split(",");
+					for (int j = 0; j < temp.length; j++) {
+						perms.add(temp[j]);
+					}
+				}
+				for (int j = 0; j < perms.size(); j++) {
+					if(perms.get(j).equals(CommandManager.commands.get(i).getCommandPermission()) || perms.get(j).equals("*")) {
 						if(arg.length > 0) {
 							CommandManager.commands.get(i).crun(client, arg);
 						} else {
