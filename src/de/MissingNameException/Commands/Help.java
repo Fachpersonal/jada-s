@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 import de.MissingNameException.App;
 import de.MissingNameException.ClientHandler;
-import de.MissingNameException.Login.OldAccount;
+import de.MissingNameException.CommandManager;
+
 
 
 public class Help implements Command{
@@ -20,11 +21,14 @@ public class Help implements Command{
 	public void crun(ClientHandler client,String...arg) throws IOException {
 		ArrayList<String> cmd = App.d.StringSELECT("SELECT * FROM jada.commands ORDER BY cmd", "cmd");
 		ArrayList<String> description = App.d.StringSELECT("SELECT * FROM jada.commands ORDER BY cmd", "description");
-		ArrayList<String> permission = App.d.StringSELECT("SELECT * FROM jada.commands ORDER BY cmd", "permission");
 		String result = "";
 		for (int i = 0; i < cmd.size(); i++) {
-			if(OldAccount.canExecute(permission.get(i), client.getClientAcc())) {
-				result += cmd.get(i) + " | " + description.get(i) + App.nl;	
+			String[] perms = App.d.SELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions").split(",");
+			
+			for (int j = 0; j < perms.length; j++) {
+				if(perms[j].equals(CommandManager.commands.get(i).getCommandPermission()) || perms[j].equals("*")) {
+					result += cmd.get(i) + " | " + description.get(i) + App.nl;
+				}
 			}
 		}
 		App.printC(client.getClientSocket(), result);

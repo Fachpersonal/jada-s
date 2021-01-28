@@ -11,7 +11,9 @@ import java.net.SocketException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.util.ArrayList;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,8 +32,6 @@ import de.MissingNameException.Commands.Time;
 import de.MissingNameException.Errors.ErrorManagerList;
 import de.MissingNameException.Errors.FixErrors;
 
-import de.MissingNameException.Login.OldAccount;
-
 public class App {
 	
 	// Created by missingnameexception!
@@ -41,7 +41,7 @@ public class App {
 	public static Driver d;
 	public static Log log;
 	
-	public static ArrayList<ClientHandler> clients = new ArrayList<>();
+	public static ArrayList<ClientHandler> clients = new ArrayList<>();	
 	
 	public static String nl = "<>";
 	
@@ -163,13 +163,17 @@ public class App {
 		*/
 		for (int i = 0; i < CommandManager.commands.size(); i++) {
 			if(CommandManager.commands.get(i).getCommandName().equals(cmd.toLowerCase()) || CommandManager.aliasExists(cmd, CommandManager.commands.get(i))) {
-				if(OldAccount.hasPermission(client.getClientSocket(), CommandManager.commands.get(i), client.getClientAcc())) {
-					if(arg.length > 0) {
-						CommandManager.commands.get(i).crun(client, arg);
-					} else {
-						CommandManager.commands.get(i).crun(client);
+				String[] perms = d.SELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions").split(",");
+				
+				for (int j = 0; j < perms.length; j++) {
+					if(perms[j].equals(CommandManager.commands.get(i).getCommandPermission()) || perms[j].equals("*")) {
+						if(arg.length > 0) {
+							CommandManager.commands.get(i).crun(client, arg);
+						} else {
+							CommandManager.commands.get(i).crun(client);
+						}
+						found = true;
 					}
-					found = true;
 				}
 			}
 		}

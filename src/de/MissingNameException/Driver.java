@@ -37,19 +37,15 @@ public class Driver {
 			e.printStackTrace();
 		}
 	}
-	public void SELECT(Socket s,String cmd, String... strings) throws IOException {
+	public String SELECT(String cmd, String string) throws IOException {
 		try {
 			myRs = myStmt.executeQuery(cmd);
-			while(myRs.next()) {
-				String x = "";
-				for(int i = 0; i < strings.length; i++) {
-					x += (myRs.getString(strings[i]) + " | ");
-				}
-				App.printC(s, x);
-			}
+			String x = myRs.getString(string);
+			return x;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	public ArrayList<String> StringSELECT(String cmd, String... strings) {
 		ArrayList<String> result = new ArrayList<String>();

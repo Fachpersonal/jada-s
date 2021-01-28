@@ -75,7 +75,7 @@ public class TODO implements Command{
 							"Description > " + description + App.nl +
 							"Creation Date > " + creationDate + App.nl +
 							"Expiration Date > " + expirationDate + App.nl +
-							"Created by > " + client.getClientAcc().getAccountName() + App.nl +
+							"Created by > " + client.getAccountName() + App.nl +
 							"Remind (in days) > " + reminder + App.nl +
 							"-------------------------------------------" + App.nl +
 							"Do you want to commit this Task? >> |[Y]ES| |[N]O|" + App.nl +
@@ -83,7 +83,7 @@ public class TODO implements Command{
 					tempArg = App.getClientMsg(client.getClientSocket());
 					
 					if(tempArg.equalsIgnoreCase("y")) {
-						App.d.execute("INSERT INTO jada.todos (label, description, creationdate, expirationdate, user, reminder) VALUE ('" + label + "', '" + description + "', '" + creationDate + "', '" + expirationDate + "', '" + client.getClientAcc().getAccountName() + "', '" + reminder + "')");
+						App.d.execute("INSERT INTO jada.todos (label, description, creationdate, expirationdate, user, reminder) VALUE ('" + label + "', '" + description + "', '" + creationDate + "', '" + expirationDate + "', '" + client.getAccountName() + "', '" + reminder + "')");
 						App.printC(client.getClientSocket(), "Todo successfully created!");
 					} else if(tempArg.equalsIgnoreCase("n")) {
 						App.printC(client.getClientSocket(), "Todo successfully canceled!");

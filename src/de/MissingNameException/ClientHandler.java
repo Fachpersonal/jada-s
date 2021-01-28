@@ -4,16 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+
 import java.net.Socket;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import de.MissingNameException.Login.OldAccount;
 import de.MissingNameException.Login.Login;
 
 public class ClientHandler implements Runnable{
 
-	private OldAccount clientAcc = null;
+	private String accountName = null;
 	
 	private Socket client;
 	
@@ -34,8 +35,8 @@ public class ClientHandler implements Runnable{
 				App.log = new Log(LocalDate.now());
 				clientMsg = App.getClientMsg(client);
 				String x = "@" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute();
-				System.out.println(x + " Client " + clientAcc.getAccountName() + " :: " + clientMsg);
-				App.log.add(x + " Client " + clientAcc.getAccountName() + " :: " + clientMsg);
+				System.out.println(x + " Client '" + accountName + "' :: " + clientMsg);
+				App.log.add(x + " Client '" + accountName + "' :: " + clientMsg);
 //				System.out.println(x + " Client x :: " + clientMsg);
 //				App.log.add(x + " Client x :: " + clientMsg);
 				
@@ -71,7 +72,5 @@ public class ClientHandler implements Runnable{
 	
 	public ClientHandler getClient() {return this;}
 	
-	public OldAccount getClientAcc() {return clientAcc;}
-	
-	public void setClientAcc(OldAccount acc) {clientAcc = acc;}
+	public String getAccountName() {return accountName;}
 }
