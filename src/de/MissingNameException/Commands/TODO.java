@@ -98,6 +98,7 @@ public class TODO implements Command{
 			} else if(arg[0].equalsIgnoreCase("remove")) {
 				if(arg.length >= 2) {
 					App.d.execute("DELETE FROM jada.todos WHERE id= " + Integer.valueOf(arg[1]));
+					App.log.add("@" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + " Client '" + client.getAccountName() + "' :: Removed TODO (=ID)'" + Integer.valueOf(arg[1])+ "'");
 					App.printC(client.getClientSocket(), "Task successfully removed!");
 					Reminder.removeReminder(Integer.valueOf(arg[1]));
 				} else {
