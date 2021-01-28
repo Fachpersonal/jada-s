@@ -34,6 +34,8 @@ import de.MissingNameException.Login.Account;
 
 public class App {
 	
+	// Created by missingnameexception!
+	
 	public static String sysHome = "/home/phil/Documents/JADA/";
 	
 	public static Driver d;
