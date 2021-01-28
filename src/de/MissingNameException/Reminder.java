@@ -14,7 +14,7 @@ public class Reminder {
 	
 	private ClientHandler client;
 	
-	public static ArrayList<Reminder> reminders;
+	public static ArrayList<Reminder> reminders = new ArrayList<Reminder>();
 	
 	public Reminder(String reminderLabel, String reminderDescription, LocalDate reminderDate, ClientHandler client) {
 		this.reminderLabel = reminderLabel;
