@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -81,20 +81,32 @@ public class App {
 				
 				//	############################################## /-/ COMMANDS \-\ ##############################################
 				CommandManager.clear();
-				CommandManager.add(new Infos());
-				CommandManager.add(new Help());
-				CommandManager.add(new TODO());
-				CommandManager.add(new Jannik());
-				CommandManager.add(new Shutdown());
-//				CommandManager.add(new FixErrors());
-				CommandManager.add(new HallOfFame());
-				CommandManager.add(new ErrorManagerList());
-				CommandManager.add(new Time());
-				CommandManager.add(new HappyBirthday());
-				CommandManager.add(new Date());
+				
 				CommandManager.add(new AccountCommand());
+				
 //				CommandManager.add(new Calendar());
 				CommandManager.add(new Changelog());
+				
+				CommandManager.add(new Date());
+				
+				CommandManager.add(new ErrorManagerList());
+				
+//				CommandManager.add(new FixErrors());
+				
+				CommandManager.add(new HallOfFame());
+				CommandManager.add(new HappyBirthday());
+				CommandManager.add(new Help());
+				
+				CommandManager.add(new Infos());
+				
+				CommandManager.add(new Jannik());
+				
+				CommandManager.add(new Shutdown());
+				
+				CommandManager.add(new Time());
+				CommandManager.add(new TODO());
+				
+				
 				//	############################################## /-/ COMMANDS \-\ ##############################################
 				
 				//	############################################## /-/ Accounts \-\ ##############################################
@@ -186,11 +198,14 @@ public class App {
 	
 	public static boolean canRun(String permission, ClientHandler client) {
 		String x = d.StringSELECT("SELECT * FROM jada.accounts WHERE accountName='" + client.getAccountName() + "'", "permissions").get(0);
-		System.out.println(x);
+		System.out.println(x + "REQUEST + " + permission);
 		if(x.contains(",")) {
 			String[] split = x.split(",");
+			System.out.println("OMS");
 			for (int i = 0; i < split.length; i++) {
+				System.out.println(split[i]);
 				if(split[i].equals(permission) || split[i].equals("*")) {
+					System.out.println("TUR");
 					return true;
 				}
 			}
