@@ -29,8 +29,6 @@ public class ClientHandler implements Runnable{
 				printC("Sry but the given username does not have permission to use J.A.D.A.!" + App.nl + "For any support please conntact our [HeadDev] @MNException");
 			}
 			
-			Reminder.showReminders(this);
-			
 			String clientMsg = "";
 			String[] temp;
 			while(true) { 

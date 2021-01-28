@@ -165,29 +165,41 @@ public class App {
 			if(CommandManager.commands.get(i).getCommandName().equals(cmd.toLowerCase()) || CommandManager.aliasExists(cmd, CommandManager.commands.get(i))) {
 //				System.out.println(client.getAccountName());
 //				System.out.println(d.StringSELECT("SELECT * FROM jada.accounts", "permissions").get(0));
-				String x = d.StringSELECT("SELECT * FROM jada.accounts WHERE accountName='"+client.getAccountName()+"'", "permissions").get(0);
-				ArrayList<String> perms = new ArrayList<String>();
-				if(x.contains(",")) {
-					String[] temp = x.split(",");
-					for (int j = 0; j < temp.length; j++) {
-						perms.add(temp[j]);
+				if(canRun(CommandManager.commands.get(i).getCommandPermission(), client)) {
+					System.out.println("ZUP");
+					if(arg.length > 0) {
+						CommandManager.commands.get(i).crun(client, arg);
+					} else {
+						CommandManager.commands.get(i).crun(client);
 					}
-				}
-				for (int j = 0; j < perms.size(); j++) {
-					if(perms.get(j).equals(CommandManager.commands.get(i).getCommandPermission()) || perms.get(j).equals("*")) {
-						if(arg.length > 0) {
-							CommandManager.commands.get(i).crun(client, arg);
-						} else {
-							CommandManager.commands.get(i).crun(client);
-						}
-						found = true;
-					}
+					found = true;
+					System.out.println("Point 3");
+				} else {
+					System.out.println("NOP");
 				}
 			}
 		}
 		if(!found) {
 			printC(client.getClientSocket(), ErrorManagerList.print("e000"));
 		}
+	}
+	
+	public static boolean canRun(String permission, ClientHandler client) {
+		String x = d.StringSELECT("SELECT * FROM jada.accounts WHERE accountName='" + client.getAccountName() + "'", "permissions").get(0);
+		System.out.println(x);
+		if(x.contains(",")) {
+			String[] split = x.split(",");
+			for (int i = 0; i < split.length; i++) {
+				if(split[i].equals(permission) || split[i].equals("*")) {
+					return true;
+				}
+			}
+		} else {
+			if(x.equals(permission) || x.equals("*")) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public static void printC(Socket s,String msg) throws IOException {

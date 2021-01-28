@@ -33,13 +33,13 @@ public class Reminder {
 		App.log.add("@" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + " Client 'SYSTEM' :: Created reminder '" + reminderLabel + "'");
 	}
 
-	public static void showReminders(ClientHandler client) throws IOException {
+	public static String showReminders(ClientHandler client) throws IOException {
 		ArrayList<String> reminder = App.d.StringSELECT("SELECT * FROM jada.reminder WHERE user='" + client.getAccountName() + "'", "id", "label" + "description" + "date"); 
 		String x = "";
 		for (int i = 0; i < reminder.size(); i+=5) {
 			x += reminder.get(i) + " | " + reminder.get(i+1) + " | " + reminder.get(i+2) + " | " + reminder.get(i+3) + " | " + reminder.get(i+4) + App.nl;
 		}
-		App.printC(client.getClientSocket(), x);
+		return x;
 	}
 	
 	public static void removeReminder(int reminderID) throws IOException {

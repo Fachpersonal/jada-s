@@ -5,6 +5,7 @@ import java.io.IOException;
 import de.MissingNameException.App;
 import de.MissingNameException.ClientHandler;
 import de.MissingNameException.Driver;
+import de.MissingNameException.Reminder;
 
 public class Login {
 	
@@ -47,7 +48,7 @@ public class Login {
 						x += " " + App.nl;
 					}
 					x += "Successfully logged in!" + App.nl + "    Logged in as '" + input + "' " + App.nl;
-					App.printC(client.getClientSocket(), x);
+					App.printC(client.getClientSocket(), x + App.nl + App.nl + Reminder.showReminders(client));
 //					OldAccount.updateAccounts();
 					client.setAccountName(input);
 					return false;
