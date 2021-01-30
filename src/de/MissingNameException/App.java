@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -24,13 +23,14 @@ import de.MissingNameException.Commands.HallOfFame;
 import de.MissingNameException.Commands.HappyBirthday;
 import de.MissingNameException.Commands.Help;
 import de.MissingNameException.Commands.Infos;
+import de.MissingNameException.Commands.Janis;
 import de.MissingNameException.Commands.Jannik;
 import de.MissingNameException.Commands.Shutdown;
 import de.MissingNameException.Commands.TODO;
 import de.MissingNameException.Commands.Time;
 
 import de.MissingNameException.Errors.ErrorManagerList;
-import de.MissingNameException.Errors.FixErrors;
+//import de.MissingNameException.Errors.FixErrors;
 
 public class App {
 	
@@ -54,7 +54,7 @@ public class App {
 //				d = new Driver("jdbc:mysql://192.168.1.14:3306/jada", "jada", "jdbc14.2");
 				d = new Driver("jdbc:mysql://localhost:3306/jada", "jada", "jdbcl");
 			} catch(Exception e) {
-				System.out.println("POMMES!");
+//				System.out.println("POMMES!");
 				e.printStackTrace();
 			}
 			ServerSocket ss = null;
@@ -62,7 +62,7 @@ public class App {
 				ss = new ServerSocket(8105);
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("SAD");
+//				System.out.println("SAD");
 				System.exit(0);
 			}
 			
@@ -99,6 +99,7 @@ public class App {
 				
 				CommandManager.add(new Infos());
 				
+				CommandManager.add(new Janis());
 				CommandManager.add(new Jannik());
 				
 				CommandManager.add(new Shutdown());
@@ -178,17 +179,18 @@ public class App {
 //				System.out.println(client.getAccountName());
 //				System.out.println(d.StringSELECT("SELECT * FROM jada.accounts", "permissions").get(0));
 				if(canRun(CommandManager.commands.get(i).getCommandPermission(), client)) {
-					System.out.println("ZUP");
+//					System.out.println("ZUP");
 					if(arg.length > 0) {
 						CommandManager.commands.get(i).crun(client, arg);
 					} else {
 						CommandManager.commands.get(i).crun(client);
 					}
 					found = true;
-					System.out.println("Point 3");
-				} else {
-					System.out.println("NOP");
+//					System.out.println("Point 3");
 				}
+//				else {
+//					System.out.println("NOP");
+//				}
 			}
 		}
 		if(!found) {
@@ -198,14 +200,14 @@ public class App {
 	
 	public static boolean canRun(String permission, ClientHandler client) {
 		String x = d.StringSELECT("SELECT * FROM jada.accounts WHERE accountName='" + client.getAccountName() + "'", "permissions").get(0);
-		System.out.println(x + "REQUEST + " + permission);
+//		System.out.println(x + "REQUEST + " + permission);
 		if(x.contains(",")) {
 			String[] split = x.split(",");
-			System.out.println("OMS");
+//			System.out.println("OMS");
 			for (int i = 0; i < split.length; i++) {
 				System.out.println(split[i]);
 				if(split[i].equals(permission) || split[i].equals("*")) {
-					System.out.println("TUR");
+//					System.out.println("TUR");
 					return true;
 				}
 			}

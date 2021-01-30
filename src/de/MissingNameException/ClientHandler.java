@@ -35,12 +35,12 @@ public class ClientHandler implements Runnable{
 				App.log = new Log(LocalDate.now());
 				clientMsg = App.getClientMsg(client);
 				String x = "@" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute();
-				System.out.println(x + " Client '" + accountName + "' :: " + clientMsg);
-				App.log.add(x + " Client '" + accountName + "' :: " + clientMsg);
 //				System.out.println(x + " Client x :: " + clientMsg);
 //				App.log.add(x + " Client x :: " + clientMsg);
 				
 				if(clientMsg != null) {
+					System.out.println(x + " Client '" + accountName + "' :: " + clientMsg);
+					App.log.add(x + " Client '" + accountName + "' :: " + clientMsg);
 					temp = App.splitArg(clientMsg);
 						if(temp == null) {
 							App.runCommand(this, clientMsg);

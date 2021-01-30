@@ -1,12 +1,9 @@
 package de.MissingNameException.Commands;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import de.MissingNameException.App;
 import de.MissingNameException.ClientHandler;
-import de.MissingNameException.CommandManager;
-import de.MissingNameException.Driver;
 import de.MissingNameException.Reminder;
 import de.MissingNameException.Errors.ErrorManagerList;
 
@@ -85,7 +82,7 @@ public class TODO implements Command{
 					tempArg = App.getClientMsg(client.getClientSocket());
 					
 					if(tempArg.equalsIgnoreCase("y")) {
-						new Reminder(label,description,LocalDate.now().plusDays(Integer.parseInt(reminder)), client);
+						new Reminder("0" ,label,description,LocalDate.now().plusDays(Integer.parseInt(reminder)), client);
 						App.log.add("@" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + " Client '" + client.getAccountName() + "' :: Created TODO '" + label + "'");
 						App.d.execute("INSERT INTO jada.todos (label, description, creationdate, expirationdate, user, reminder) VALUE ('" + label + "', '" + description + "', '" + creationDate + "', '" + expirationDate + "', '" + client.getAccountName() + "', '" + reminder + "')");
 						App.printC(client.getClientSocket(), "Todo successfully created!");
@@ -97,7 +94,7 @@ public class TODO implements Command{
 				}
 			} else if(arg[0].equalsIgnoreCase("remove")) {
 				if(arg.length >= 2) {
-					App.d.execute("DELETE FROM jada.todos WHERE id= " + Integer.valueOf(arg[1]));
+					App.d.execute("DELETE FROM jada.todos WHERE id = " + Integer.valueOf(arg[1]));
 					App.log.add("@" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + " Client '" + client.getAccountName() + "' :: Removed TODO (=ID)'" + Integer.valueOf(arg[1])+ "'");
 					App.printC(client.getClientSocket(), "Task successfully removed!");
 					Reminder.removeReminder(Integer.valueOf(arg[1]));

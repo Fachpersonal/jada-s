@@ -11,6 +11,7 @@ public class HappyBirthday implements Command{
 	private String commandPermission = "nina"; // change if commands needs a permission!
 	private String[] commandAlias = {"hb", "birthday", "nina"};
 	
+	@SuppressWarnings("unused")
 	private int counter;
     private char posn[]=new char[10];
     private char player;
@@ -30,7 +31,8 @@ public class HappyBirthday implements Command{
             newBoard();
             play();
             System.out.println ("Willst du nochmal spielen? (Enter'yes')? ");
-            Scanner in =new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner in =new Scanner(System.in);
             ch=in.nextLine();
             //System.out.println("ch value is  "+ch);
         }while (ch.equals("yes"));
@@ -83,7 +85,8 @@ public class HappyBirthday implements Command{
             boolean posTaken = true;
             while (posTaken) {
                 // System.out.println( "position is taken, please enter a valid space");
-                Scanner in =new Scanner (System.in);
+                @SuppressWarnings("resource")
+				Scanner in =new Scanner (System.in);
                 spot=in.nextInt();
                 posTaken = checkPosn(spot);
                 if(posTaken==false)

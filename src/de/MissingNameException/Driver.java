@@ -1,14 +1,18 @@
 package de.MissingNameException;
 
 import java.io.IOException;
-import java.net.Socket;
+
 import java.sql.*;
+
 import java.util.ArrayList;
 
 public class Driver {
 	
+	@SuppressWarnings("unused")
 	private String url;
+	@SuppressWarnings("unused")
 	private String user;
+	@SuppressWarnings("unused")
 	private String pssw;
 	
 	private Connection myConn;

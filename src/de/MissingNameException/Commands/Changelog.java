@@ -1,15 +1,13 @@
 package de.MissingNameException.Commands;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import java.net.URL;
-import java.util.Scanner;
 
 import de.MissingNameException.App;
 import de.MissingNameException.ClientHandler;
-import de.MissingNameException.Errors.ErrorManagerList;
 
 public class Changelog implements Command{
 	

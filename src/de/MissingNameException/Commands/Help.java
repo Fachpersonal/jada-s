@@ -2,8 +2,6 @@ package de.MissingNameException.Commands;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-
 import de.MissingNameException.App;
 import de.MissingNameException.ClientHandler;
 import de.MissingNameException.CommandManager;
